@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FacebookClassLibrary", "FacebookClassLibrary\FacebookClassLibrary.csproj", "{94961214-FE66-4DC6-9656-77384EB8E2C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{94961214-FE66-4DC6-9656-77384EB8E2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94961214-FE66-4DC6-9656-77384EB8E2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94961214-FE66-4DC6-9656-77384EB8E2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94961214-FE66-4DC6-9656-77384EB8E2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {337AD39B-A6BF-4D62-8E59-8A344B948BA5}
+	EndGlobalSection
+EndGlobal
