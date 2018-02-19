@@ -4,7 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <materialDesign:ColorZone Grid.ColumnSpan="2" Mode="PrimaryMid" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" Text="Facebook Import">
+                </TextBlock>
+            </StackPanel>
+        </materialDesign:ColorZone>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
+            <Button HorizontalContentAlignment="Left" Margin="0 20 0 0" Click="LoginClick" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                LOGIN
+            </Button>
+        </StackPanel>
+
+        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AccessToken}" />
     </Grid>
 </Window>
