@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FacebookClassLibrary
+namespace FacebookApp
 {
-    public class Class1
+    class FacebookAuthenticationViewModel
     {
     }
 }
