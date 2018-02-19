@@ -46,6 +46,7 @@ namespace FacebookApp
                 url = (new Regex("#")).Replace(url, "?", 1);
                 Dictionary<string, string> urlParams = GetParams(url);
                 AccessToken = urlParams["access_token"];
+                AccessToken = AccessToken;
                 DialogResult = true;
                 this.Close();
             }
