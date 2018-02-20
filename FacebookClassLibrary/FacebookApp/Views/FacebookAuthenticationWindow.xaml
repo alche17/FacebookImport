@@ -6,6 +6,6 @@
         mc:Ignorable="d"
         Title="FacebookAuthenticationWindow" Height="300" Width="300">
     <Grid>
-        <WebBrowser Name="wbSample" Navigated="wbSample_Navigated" Navigating="wbSample_Navigating" />
+        <WebBrowser Name="wbSample" Navigated="wbSample_Navigated" />
     </Grid>
 </Window>

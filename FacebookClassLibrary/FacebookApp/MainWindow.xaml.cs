@@ -1,5 +1,6 @@
 ﻿using System.Windows;
-using System;
+using FacebookApp.ViewModels;
+using FacebookClassLibrary;
 
 namespace FacebookApp
 {
@@ -8,22 +9,32 @@ namespace FacebookApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string AccessToken { get; set; }
+        MainViewModel _mvm;
+        FacebookPlugin _fb;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            AccessToken = "Nothing yet";
+            _fb = new FacebookPlugin();
+            _mvm = new MainViewModel();
+            DataContext = _mvm;
         }
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow() { AppID = "191439638113408" };
+            FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow();
             if (dialog.ShowDialog() == true)
             {
-                AccessToken = dialog.AccessToken;
+                // need to set access token somewhere
+                //_mvm.AccessToken = dialog.Fbvm.AccessToken;
             }
+        }
+        
+        private void GetPageDataClick(object sender, RoutedEventArgs e)
+        {
+            var data = _fb.GetPageData();
+            _mvm.SetFacebookPageData(data);
         }
     }
 }

@@ -34,8 +34,36 @@
             <Button HorizontalContentAlignment="Left" Margin="0 20 0 0" Click="LoginClick" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
                 LOGIN
             </Button>
+            <Button HorizontalContentAlignment="Left" Margin="0 20 0 0" Click="GetPageDataClick" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
+                GET PAGE DATA
+            </Button>
         </StackPanel>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding AccessToken}" />
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="5">
+            <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Facebook Page Data">
+                    </TextBlock>
+                    <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
+                    
+                    <ListView x:Name="FacebookPageDataTable" VerticalAlignment="Top" 
+                                  MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Pages}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                                <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
+                                <GridViewColumn DisplayMemberBinding="{Binding FanCount}" Header="Fan Count" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </materialDesign:Card>
+        </StackPanel>
     </Grid>
 </Window>

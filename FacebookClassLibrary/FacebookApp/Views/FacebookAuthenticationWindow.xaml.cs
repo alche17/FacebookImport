@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
+using FacebookClassLibrary.ViewModels;
+using FacebookClassLibrary;
 
 namespace FacebookApp
 {
@@ -10,24 +12,27 @@ namespace FacebookApp
     /// </summary>
     public partial class FacebookAuthenticationWindow : Window
     {
-        public string AppID { get; set; }
-
-        public string AccessToken { get; set; }
+        public FacebookAuthenticationViewModel Fbvm;
+        public FacebookPlugin FbPlugin;
 
         public FacebookAuthenticationWindow()
         {
             InitializeComponent();
-            this.Loaded += (object sender, RoutedEventArgs e) =>
-            {
-                wbSample.MessageHook += wbSample_MessageHook;
 
+            Fbvm = new FacebookAuthenticationViewModel();
+            FbPlugin = new FacebookPlugin();
+            DataContext = Fbvm;
+
+            Loaded += (object sender, RoutedEventArgs e) =>
+            {
                 DeleteFacebookCookie();
 
                 var destinationURL = String.Format("https://www.facebook.com/v2.12/dialog/oauth?" +
                     "client_id=191439638113408" +
                     "&display=popup" +
                     "&response_type=token" +
-                    "&redirect_uri=https://www.facebook.com/connect/login_success.html");
+                    "&redirect_uri=https://www.facebook.com/connect/login_success.html" +
+                    "&scope=manage_pages,read_insights");
                 wbSample.Navigate(destinationURL);
             };
         }
@@ -45,32 +50,13 @@ namespace FacebookApp
             {
                 url = (new Regex("#")).Replace(url, "?", 1);
                 Dictionary<string, string> urlParams = GetParams(url);
-                AccessToken = urlParams["access_token"];
-                AccessToken = AccessToken;
+                FbPlugin.SetUserAccessToken(urlParams["access_token"]);
                 DialogResult = true;
-                this.Close();
+                Close();
             }
         }
 
-        private void wbSample_Navigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e)
-        {
-            if (e.Uri.LocalPath == "/r.php")
-            {
-                MessageBox.Show("To create a new account go to www.facebook.com", "Could Not Create Account", MessageBoxButton.OK, MessageBoxImage.Error);
-                e.Cancel = true;
-            }
-        }
-
-        IntPtr wbSample_MessageHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == 130)
-            {
-                this.Close();
-            }
-            return IntPtr.Zero;
-        }
-
-        static Dictionary<string, string> GetParams(string uri)
+        public Dictionary<string, string> GetParams(string uri)
         {
             var matches = Regex.Matches(uri, @"[\?&](([^&=]+)=([^&=#]*))", RegexOptions.Compiled);
             var keyValues = new Dictionary<string, string>(matches.Count);
