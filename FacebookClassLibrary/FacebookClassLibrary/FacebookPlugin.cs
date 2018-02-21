@@ -1,71 +1,55 @@
-﻿using FacebookClassLibrary.Models;
-using RestSharp;
+﻿using RestSharp;
 
 namespace FacebookClassLibrary
 {
     public class FacebookPlugin
     {
         private readonly RestClient _client;
-        private FacebookAuthenticator _fbAuthenticator;
 
         public FacebookPlugin()
         {
             _client = new RestClient("https://graph.facebook.com");
-            _fbAuthenticator = new FacebookAuthenticator();
         }
 
-        public bool IsLoggedIn()
-        {
-            // need to add logic
-            // need to check this before user clicks buttons on UI to do GET requests
-            return true;
-        }
-
-        public void SetUserAccessToken(string accessToken)
-        {
-            _fbAuthenticator.UserAccessToken = accessToken;
-        }
-
-        public void GetPageAccessToken()
+        public string FacebookAPICall(string resource, string access_token, string fields = "")
         {
             var request = new RestRequest(Method.GET)
             {
-                // resource = {edge-id} which in this case is a page-id
-                Resource = "me/accounts"
+                Resource = resource
             };
 
-            request.AddParameter("access_token", _fbAuthenticator.UserAccessToken);
-
-            IRestResponse response = _client.Execute(request);
-
-        }
-
-        public string GetPageData()
-        {
-            var request = new RestRequest(Method.GET)
+            request.AddParameter("access_token", access_token);
+            if (fields != "")
             {
-                // resource = {edge-id} which in this case is a page-id
-                Resource = _fbAuthenticator.PageAccessToken
-            };
-
-            request.AddParameter("access_token", _fbAuthenticator.UserAccessToken);
-            request.AddParameter("fields", "['id','name','category','fan_count']");
-
+                request.AddParameter("fields", fields);
+            }
             IRestResponse response = _client.Execute(request);
             return response.Content;
         }
 
-        public string GetPermissions()
+        public string GetUserData(string user_access_token)
         {
-            var request = new RestRequest(Method.GET)
-            {
-                Resource = "me/permissions"
-            };
+            return FacebookAPICall("me", user_access_token);
+        }
 
-            request.AddParameter("access_token", _fbAuthenticator.UserAccessToken);
+        public string GetPageFeed(string page_access_token)
+        {
+            return FacebookAPICall("me/accounts", page_access_token);
+        }
 
-            IRestResponse response = _client.Execute(request);
-            return response.Content;
+        public string GetPages(string user_access_token)
+        {
+            return FacebookAPICall("me/accounts", user_access_token);
+        }
+
+        public string GetPageData(string page_access_token, string user_access_token)
+        {
+            return FacebookAPICall(page_access_token, user_access_token, "['id','name','category','fan_count']");
+        }
+
+        public string GetPermissions(string user_access_token)
+        {
+            return FacebookAPICall("me/permissions", user_access_token);
         }
     }
 }

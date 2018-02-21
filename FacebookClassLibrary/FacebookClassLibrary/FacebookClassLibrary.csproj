@@ -64,9 +64,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookPlugin.cs" />
+    <Compile Include="Models\FacebookComment.cs" />
+    <Compile Include="Models\Metadata\AgeRange.cs" />
+    <Compile Include="Models\FacebookAccounts.cs" />
     <Compile Include="Models\FacebookAuthenticator.cs" />
-    <Compile Include="Models\FacebookPage.cs" />
-    <Compile Include="Models\Page\Posts.cs" />
+    <Compile Include="Models\Profiles\FacebookPage.cs" />
+    <Compile Include="Models\FacebookPost.cs" />
+    <Compile Include="Models\Profiles\FacebookProfile.cs" />
+    <Compile Include="Models\Profiles\FacebookUser.cs" />
+    <Compile Include="Models\Metadata\Location.cs" />
+    <Compile Include="Models\Metadata\Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FacebookAuthenticationViewModel.cs" />
   </ItemGroup>

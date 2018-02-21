@@ -50,7 +50,9 @@ namespace FacebookApp
             {
                 url = (new Regex("#")).Replace(url, "?", 1);
                 Dictionary<string, string> urlParams = GetParams(url);
-                FbPlugin.SetUserAccessToken(urlParams["access_token"]);
+
+                // NEED TO FIND OUT HOW TO DO THIS OUTSIDE DEVELOPMENT
+                //FbPlugin.SetUserAccessToken(urlParams["access_token"]);
                 DialogResult = true;
                 Close();
             }

@@ -10,13 +10,11 @@ namespace FacebookApp
     public partial class MainWindow : Window
     {
         MainViewModel _mvm;
-        FacebookPlugin _fb;
 
         public MainWindow()
         {
             InitializeComponent();
-
-            _fb = new FacebookPlugin();
+            
             _mvm = new MainViewModel();
             DataContext = _mvm;
         }
@@ -26,15 +24,13 @@ namespace FacebookApp
             FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow();
             if (dialog.ShowDialog() == true)
             {
-                // need to set access token somewhere
-                //_mvm.AccessToken = dialog.Fbvm.AccessToken;
+                _mvm.SetUser();
             }
         }
         
         private void GetPageDataClick(object sender, RoutedEventArgs e)
         {
-            var data = _fb.GetPageData();
-            _mvm.SetFacebookPageData(data);
+            _mvm.SetPages();
         }
     }
 }
