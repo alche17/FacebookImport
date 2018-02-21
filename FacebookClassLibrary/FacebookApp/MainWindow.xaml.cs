@@ -28,8 +28,9 @@ namespace FacebookApp
             }
         }
         
-        private void GetPageDataClick(object sender, RoutedEventArgs e)
+        private void GetUserDataClick(object sender, RoutedEventArgs e)
         {
+            _mvm.SetUser();
             _mvm.SetPages();
         }
     }

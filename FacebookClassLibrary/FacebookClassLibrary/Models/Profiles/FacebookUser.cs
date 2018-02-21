@@ -13,11 +13,13 @@ namespace FacebookClassLibrary.Models
         #region Fields
         public Location Address { get; set; }
         
-        public AgeRange AgeRange { get; set; }
+        public AgeRange Age_Range { get; set; }
 
         public string Gender { get; set; }
 
         public string Locale { get; set; }
+
+        public Location Location { get; set; }
         #endregion
 
         #region Edges

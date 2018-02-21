@@ -29,7 +29,7 @@ namespace FacebookClassLibrary
 
         public string GetUserData(string user_access_token)
         {
-            return FacebookAPICall("me", user_access_token);
+            return FacebookAPICall("me", user_access_token, "['id','name','address','age_range','gender','locale','location']");
         }
 
         public string GetPageFeed(string page_access_token)
