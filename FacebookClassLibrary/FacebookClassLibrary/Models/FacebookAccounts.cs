@@ -8,10 +8,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class FacebookAccounts
     {
-        public FacebookAccounts()
-        {
-        }
-        
         public ObservableCollection<FacebookPage> Data { get; set; }
 
         public Dictionary<string, Dictionary<string,string>> Paging { get; set; }

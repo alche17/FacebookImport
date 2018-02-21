@@ -6,10 +6,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class AgeRange
     {
-        public AgeRange()
-        {
-        }
-
         public int Max { get; set; }
 
         public int Min { get; set; }

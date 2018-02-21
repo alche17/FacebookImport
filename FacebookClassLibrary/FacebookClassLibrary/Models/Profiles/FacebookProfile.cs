@@ -7,10 +7,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class FacebookProfile
     {
-        public FacebookProfile()
-        {
-        }
-
         public string ID { get; set; }
 
         public string Name { get; set; }

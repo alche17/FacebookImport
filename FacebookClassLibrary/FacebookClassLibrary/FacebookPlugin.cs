@@ -4,11 +4,11 @@ namespace FacebookClassLibrary
 {
     public class FacebookPlugin
     {
-        private readonly RestClient _client;
+        readonly RestClient _client;
 
         public FacebookPlugin()
         {
-            _client = new RestClient("https://graph.facebook.com");
+            Client = new RestClient("https://graph.facebook.com");
         }
 
         public string FacebookAPICall(string resource, string access_token, string fields = "")
@@ -50,6 +50,12 @@ namespace FacebookClassLibrary
         public string GetPermissions(string user_access_token)
         {
             return FacebookAPICall("me/permissions", user_access_token);
+        }
+
+        public RestClient Client
+        {
+            get { return _client; }
+            set { _client = value; }
         }
     }
 }
