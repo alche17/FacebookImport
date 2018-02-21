@@ -1,6 +1,7 @@
-# Facebook Import PoC
-This PoC models how data collected through HTTP GET requests to the Facebook API can be exported into a single column in Excel for data analysis.
+# Facebook Plugin for .NET 
+This project includes a library that can be used with a native Windows desktop application. In the sample project given it is used in a simple WPF application.
 
-## RestSharp
-To model this, this project is using a simple REST and HTTP API Client for .NET called RestSharp.
+## NuGet Packages Installed
+- RestSharp
+- - To model this, this project is using a simple REST and HTTP API Client for .NET called RestSharp.
 You can find their project on GitHub [here](https://github.com/restsharp/RestSharp).
