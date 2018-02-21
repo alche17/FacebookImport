@@ -3,5 +3,5 @@ This project includes a library that can be used with a native Windows desktop a
 
 ## NuGet Packages Installed
 - RestSharp
-- - To model this, this project is using a simple REST and HTTP API Client for .NET called RestSharp.
-You can find their project on GitHub [here](https://github.com/restsharp/RestSharp).
+  - A simple REST and HTTP API Client for .NET called RestSharp. You can find their project on GitHub [here](https://github.com/restsharp/RestSharp).
+- Json.Net (NewtonSoft)
