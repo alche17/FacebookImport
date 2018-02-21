@@ -8,10 +8,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class FacebookPost
     {
-        public FacebookPost()
-        {
-        }
-
         #region fields
         public string ID { get; set; }
         

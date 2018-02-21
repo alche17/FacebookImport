@@ -6,10 +6,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class FacebookUser : FacebookProfile
     {
-        public FacebookUser()
-        {
-        }
-
         #region Fields
         public Location Address { get; set; }
         

@@ -6,10 +6,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class Location
     {
-        public Location()
-        {
-        }
-
         public string City { get; set; }
 
         public string Country { get; set; }

@@ -8,10 +8,6 @@ namespace FacebookClassLibrary.Models
     /// </summary>
     public class FacebookComment
     {
-        public FacebookComment()
-        {
-        }
-
         public string ID { get; set; }
 
         public FacebookProfile From { get; set; }

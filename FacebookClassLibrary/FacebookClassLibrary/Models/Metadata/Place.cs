@@ -3,10 +3,6 @@ namespace FacebookClassLibrary.Models
 {
     public class Place
     {
-        public Place()
-        {
-        }
-
         public string ID { get; set; }
 
         public Location Location { get; set; }
