@@ -16,14 +16,7 @@ namespace FacebookClassLibrary.Models
         #endregion
 
         #region edges
-        public ObservableCollection<FacebookPost> Posts { get; set; }
+        public  FacebookFeed Posts { get; set; }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

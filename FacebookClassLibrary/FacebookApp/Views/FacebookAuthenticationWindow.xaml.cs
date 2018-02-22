@@ -32,7 +32,7 @@ namespace FacebookApp
                     "&display=popup" +
                     "&response_type=token" +
                     "&redirect_uri=https://www.facebook.com/connect/login_success.html" +
-                    "&scope=manage_pages,read_insights");
+                    "&scope=manage_pages,read_insights,user_location,user_birthday");
                 wbSample.Navigate(destinationURL);
             };
         }

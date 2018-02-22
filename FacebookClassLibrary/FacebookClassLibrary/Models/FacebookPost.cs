@@ -1,6 +1,4 @@
 ﻿
-using System.Collections.ObjectModel;
-
 namespace FacebookClassLibrary.Models
 {
     /// <summary>
@@ -19,9 +17,9 @@ namespace FacebookClassLibrary.Models
         #endregion
 
         #region edges
-        public int Likes { get; set; }
+        public FacebookProfiles Likes { get; set; }
 
-        public ObservableCollection<FacebookComment> Comments { get; set; }
+        public FacebookComments Comments { get; set; }
         #endregion
     }
 }

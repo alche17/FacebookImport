@@ -64,10 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookPlugin.cs" />
+    <Compile Include="Models\FacebookComments.cs" />
+    <Compile Include="Models\FacebookFeed.cs" />
     <Compile Include="Models\FacebookComment.cs" />
     <Compile Include="Models\Metadata\AgeRange.cs" />
     <Compile Include="Models\FacebookAccounts.cs" />
     <Compile Include="Models\FacebookAuthenticator.cs" />
+    <Compile Include="Models\Metadata\Reaction.cs" />
     <Compile Include="Models\Profiles\FacebookPage.cs" />
     <Compile Include="Models\FacebookPost.cs" />
     <Compile Include="Models\Profiles\FacebookProfile.cs" />

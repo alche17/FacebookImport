@@ -4,7 +4,7 @@ namespace FacebookClassLibrary
 {
     public class FacebookPlugin
     {
-        readonly RestClient _client;
+        readonly RestClient Client;
 
         public FacebookPlugin()
         {
@@ -23,39 +23,48 @@ namespace FacebookClassLibrary
             {
                 request.AddParameter("fields", fields);
             }
-            IRestResponse response = _client.Execute(request);
+            IRestResponse response = Client.Execute(request);
             return response.Content;
         }
 
-        public string GetUserData(string user_access_token)
+        public string GetUserData(string user_id, string access_token)
         {
-            return FacebookAPICall("me", user_access_token, "['id','name','address','age_range','gender','locale','location']");
+            return FacebookAPICall(user_id, access_token, "id,name,address,age_range,gender,locale,location");
         }
 
-        public string GetPageFeed(string page_access_token)
+        public string GetPageFeed(string page_id, string access_token)
         {
-            return FacebookAPICall("me/accounts", page_access_token);
+            return FacebookAPICall(page_id + "/feed", access_token, "id,message,from,likes,comments,place");
         }
 
-        public string GetPages(string user_access_token)
+        public string GetPages(string user_id, string access_token)
         {
-            return FacebookAPICall("me/accounts", user_access_token);
+            return FacebookAPICall(user_id + "/accounts", access_token);
         }
 
-        public string GetPageData(string page_access_token, string user_access_token)
+        public string GetPageData(string page_id, string access_token)
         {
-            return FacebookAPICall(page_access_token, user_access_token, "['id','name','category','fan_count']");
+            return FacebookAPICall(page_id, access_token, "id,name,category,fan_count");
         }
 
-        public string GetPermissions(string user_access_token)
+        public string GetPermissions(string user_id, string access_token)
         {
-            return FacebookAPICall("me/permissions", user_access_token);
+            return FacebookAPICall(user_id + "permissions", access_token);
         }
 
-        public RestClient Client
+        public string GetPostData(string post_id, string access_token)
         {
-            get { return _client; }
-            set { _client = value; }
+            return FacebookAPICall(post_id, access_token, "message,id,from,place,likes,comments");
+        }
+
+        public string GetPostComments(string post_id, string access_token)
+        {
+            return FacebookAPICall(post_id + "/comments", access_token);
+        }
+
+        public string GetComment(string comment_id, string access_token)
+        {
+            return FacebookAPICall(comment_id, access_token);
         }
     }
 }

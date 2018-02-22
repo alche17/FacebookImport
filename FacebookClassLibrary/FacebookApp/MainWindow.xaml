@@ -13,146 +13,223 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        
-        <materialDesign:ColorZone Grid.ColumnSpan="2" Mode="PrimaryMid" Padding="10">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" Text="Facebook Import">
-                </TextBlock>
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:ColorZone Grid.ColumnSpan="2" Mode="PrimaryMid" Padding="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" Text="Facebook Import">
+                    </TextBlock>
+                </StackPanel>
+            </materialDesign:ColorZone>
+            <!-- Side bar menu -->
+            <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
+                <Button HorizontalContentAlignment="Left" Content="LOGIN" Margin="0 20 0 0" Click="LoginClick" 
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Separator Style="{StaticResource MaterialDesignSeparator}" />
+                <Label Content="User Account" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+                <Button HorizontalContentAlignment="Left" Click="GetUserInfoClick" Content="GET USER INFO"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetUserPagesClick" Content="GET USER PAGES"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetPageClick" Content="GET PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetPostClick" Content="GET POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetCommentClick" Content="GET COMMENT"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Separator Style="{StaticResource MaterialDesignSeparator}" />
+                <Label Content="Public" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+                <Button HorizontalContentAlignment="Left" Click="GetPublicPageClick" Content="GET PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetKCCPageClick" Content="GET KCC PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetKCCFeedClick" Content="GET KCC FEED"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Button HorizontalContentAlignment="Left" Click="GetKCCSamplePostClick" Content="GET KCC SAMPLE POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+                <Separator Style="{StaticResource MaterialDesignSeparator}" />
+                <Label Content="Filter" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+                <TextBox Margin="15 5" Foreground="White" Text="{Binding UserID, Mode=TwoWay}" materialDesign:HintAssist.Hint="User ID" />
+                <TextBox Margin="15 5" Foreground="White" Text="{Binding PageID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Page ID" />
+                <TextBox Margin="15 5" Foreground="White" Text="{Binding PostID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Post ID" />
+                <TextBox Margin="15 5" Foreground="White" Text="{Binding CommentID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Comment ID" />
             </StackPanel>
-        </materialDesign:ColorZone>
 
-        <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
-            <Button HorizontalContentAlignment="Left" Margin="0 20 0 0" Click="LoginClick" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                LOGIN
-            </Button>
-            <Button HorizontalContentAlignment="Left" Margin="0 20 0 0" Click="GetUserDataClick" Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}">
-                GET USER DATA
-            </Button>
-        </StackPanel>
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="5">
+                <!-- User Information Card -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" 
+                                   Style="{StaticResource MaterialDesignTitleTextBlock}" Text="User" />
+                        <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <TextBlock Text="Basic" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID" Width="80" />
+                            <Label Content="{Binding FBUser.ID}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Name" Width="80" />
+                            <Label Content="{Binding FBUser.Name}" />
+                        </StackPanel>
+                        <TextBlock Text="Advanced" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Min Age" Width="80" />
+                            <Label Content="{Binding FBUser.Age_Range.Min}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Gender" Width="80" />
+                            <Label Content="{Binding FBUser.Gender}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Locale" Width="80" />
+                            <Label Content="{Binding FBUser.Locale}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Location" Width="80" />
+                            <StackPanel Grid.Row="10" Grid.Column="1"  Orientation="Horizontal">
+                                <Label Content="{Binding FBUser.Location.Name}" />
+                                <Label Content="{Binding FBUser.Location.City}" />
+                                <Label Content="{Binding FBUser.Location.State}" />
+                                <Label Content="{Binding FBUser.Location.Zip}" />
+                                <Label Content="{Binding FBUser.Location.Region}" />
+                                <Label Content="{Binding FBUser.Location.Country}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+                
+                <!-- User Pages Card -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="User's Pages">
+                        </TextBlock>
+                        <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <ListView VerticalAlignment="Top" MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Pages}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Fan_Count}" Header="Fan Count" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Access_Token}" Header="Access Token" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </materialDesign:Card>
+                
+                <!-- Page Info Card -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" 
+                                   Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Page" />
+                        <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <TextBlock Text="Basic" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID" Width="100" />
+                            <Label Content="{Binding FBPage.ID}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Name" Width="100" />
+                            <Label Content="{Binding FBPage.Name}" />
+                        </StackPanel>
+                        <TextBlock Text="Advanced" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Access Token" Width="100" />
+                            <Label Content="{Binding FBPage.Access_Token}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Category" Width="100" />
+                            <Label Content="{Binding FBPage.Category}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Fan Count" Width="100" />
+                            <Label Content="{Binding FBPage.Fan_Count}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Perms" Width="100" />
+                            <Label Content="{Binding FBPage.Perms}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Posts" Width="100" />
+                            <Label Content="{Binding FBPage.Posts}" />
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
 
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="5">
-            <!-- User Information Card -->
-            <materialDesign:Card Padding="8" Margin="10 5 10 10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="User Data">
-                    </TextBlock>
-                    <Separator Grid.Row="1" Grid.ColumnSpan="2" Style="{StaticResource MaterialDesignDarkSeparator}" />
-                    <TextBlock Grid.Row="2"  Text="Basic" FontSize="16" Padding="5" />
-                    <Label Grid.Row="3" Content="ID" />
-                    <Label Grid.Row="3" Grid.Column="1" Content="{Binding FBUser.ID}" />
-                    <Label Grid.Row="4" Content="Name" />
-                    <Label Grid.Row="4" Grid.Column="1" Content="{Binding FBUser.Name}" />
-                    <TextBlock Grid.Row="5" Text="Advanced" FontSize="16" Padding="5" />
-                    <Label Grid.Row="6" Content="Address" />
-                    <Label Grid.Row="6" Grid.Column="1" Content="{Binding FBUser.Address}" />
-                    <Label Grid.Row="7" Content="Age Range" />
-                    <Label Grid.Row="7" Grid.Column="1" Content="{Binding FBUser.Age_Range}" />
-                    <Label Grid.Row="8" Content="Gender" />
-                    <Label Grid.Row="8" Grid.Column="1" Content="{Binding FBUser.Gender}" />
-                    <Label Grid.Row="9" Content="Locale" />
-                    <Label Grid.Row="9" Grid.Column="1" Content="{Binding FBUser.Locale}" />
-                    <Label Grid.Row="10" Content="Location" />
-                    <Label Grid.Row="10" Grid.Column="1" Content="{Binding FBUser.Location}" />
-                </Grid>
-            </materialDesign:Card>
-            <!-- Page List Card -->
-            <materialDesign:Card Padding="8" Margin="10 5 10 10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="User's Facebook Pages">
-                    </TextBlock>
-                    <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
-                    
-                    <ListView x:Name="FacebookPageDataTable" VerticalAlignment="Top" 
-                                  MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Pages}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Access_Token}" Header="Access Token" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Perms}" Header="Perms" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                                <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
-                                <GridViewColumn DisplayMemberBinding="{Binding FanCount}" Header="Fan Count" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                <!-- Page Posts -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Page's Posts">
+                        </TextBlock>
+                        <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <ListView VerticalAlignment="Top" MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Posts}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Place.Name}" Header="Place" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Likes}" Header="Likes" />
+                                    <GridViewColumn DisplayMemberBinding="{Binding Comments}" Header="Comments" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                </materialDesign:Card>
 
-                    <Label Content="{Binding TestString}" Grid.Row="3"/>
-                </Grid>
-            </materialDesign:Card>
-            <materialDesign:Card Padding="8" Margin="10 5 10 10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Post Data">
-                    </TextBlock>
-                    <Label Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="Search by Post ID" />
-                    <TextBox Grid.Column="3" Text="{Binding PostID,Mode=TwoWay}" ></TextBox>
-                    <Separator Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignDarkSeparator}" />
-                    <TextBlock Grid.Row="2"  Text="Basic" FontSize="16" Padding="5" />
-                    <Label Grid.Row="3" Content="ID" />
-                    <Label Grid.Row="3" Grid.Column="1" Content="{Binding FBUser.ID}" />
-                    <Label Grid.Row="4" Content="Name" />
-                    <Label Grid.Row="4" Grid.Column="1" Content="{Binding FBUser.Name}" />
-                    <TextBlock Grid.Row="5" Text="Advanced" FontSize="16" Padding="5" />
-                    <Label Grid.Row="6" Content="Address" />
-                    <Label Grid.Row="6" Grid.Column="1" Content="{Binding FBUser.Address}" />
-                    <Label Grid.Row="7" Content="Age Range" />
-                    <Label Grid.Row="7" Grid.Column="1" Content="{Binding FBUser.Age_Range}" />
-                    <Label Grid.Row="8" Content="Gender" />
-                    <Label Grid.Row="8" Grid.Column="1" Content="{Binding FBUser.Gender}" />
-                    <Label Grid.Row="9" Content="Locale" />
-                    <Label Grid.Row="9" Grid.Column="1" Content="{Binding FBUser.Locale}" />
-                    <Label Grid.Row="10" Content="Location" />
-                    <Label Grid.Row="10" Grid.Column="1" Content="{Binding FBUser.Location}" />
-                </Grid>
-            </materialDesign:Card>
-        </StackPanel>
-    </Grid>
+                <!-- Post Info Card -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" 
+                                   Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Post" />
+                        <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID" Width="100" />
+                            <Label Content="{Binding FBPost.ID}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="From" Width="100" />
+                            <Label Content="{Binding FBPost.From.Name}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Message" Width="100" />
+                            <Label Content="{Binding FBPost.Message}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Place" Width="100" />
+                            <Label Content="{Binding FBPost.Place}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Likes" Width="100" />
+                            <Label Content="{Binding FBPost.Likes}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Comments" Width="100" />
+                            <Label Content="{Binding FBPost.Comments}" />
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Window>

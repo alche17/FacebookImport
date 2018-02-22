@@ -24,14 +24,56 @@ namespace FacebookApp
             FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow();
             if (dialog.ShowDialog() == true)
             {
-                _mvm.SetUser();
             }
         }
         
-        private void GetUserDataClick(object sender, RoutedEventArgs e)
+        private void GetUserInfoClick(object sender, RoutedEventArgs e)
         {
             _mvm.SetUser();
-            _mvm.SetPages();
+        }
+
+        private void GetUserPagesClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetUserPages();
+        }
+
+        private void GetPageClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetUserPage();
+        }
+
+        private void GetPublicPageClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetPublicPage();
+        }
+
+        private void GetPostClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetPost();
+        }
+
+        private void GetCommentClick(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void GetKCCPageClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.PageID = "CityOfKingston";
+            _mvm.SetUserPage();
+        }
+
+        private void GetKCCFeedClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.PageID = "CityOfKingston";
+            _mvm.SetFeed();
+        }
+
+        private void GetKCCSamplePostClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.PageID = "CityOfKingston";
+            _mvm.PostID = "144064188977112_1813323618717819";
+            _mvm.SetPost();
         }
     }
 }
