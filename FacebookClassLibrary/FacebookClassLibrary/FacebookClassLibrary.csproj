@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookPlugin.cs" />
+    <Compile Include="Models\FacebookProfiles.cs" />
     <Compile Include="Models\FacebookComments.cs" />
     <Compile Include="Models\FacebookFeed.cs" />
     <Compile Include="Models\FacebookComment.cs" />
