@@ -4,6 +4,10 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using Jitbit.Utils;
+using FacebookClassLibrary.Models.Metadata;
+using System;
+using System.IO;
+using System.Collections.Generic;
 
 namespace FacebookApp.ViewModels
 {
@@ -12,12 +16,17 @@ namespace FacebookApp.ViewModels
         private FacebookUser _fbUser;
         private FacebookPage _fbPage;
         private FacebookPost _fbPost;
+        private FacebookGroup _fbGroup;
         private FacebookComment _fbComment;
         private FacebookPlugin _fbPlugin;
         private FacebookAuthenticator _fbAuth;
         private ObservableCollection<FacebookPage> _pages;
-        private ObservableCollection<FacebookPost> _posts;
+        private ObservableCollection<FacebookPost> _pagePosts;
         private ObservableCollection<FacebookComment> _comments;
+        private ObservableCollection<Reaction> _reactions;
+        private ObservableCollection<FacebookGroup> _groups;
+        private ObservableCollection<FacebookPost> _groupPosts;
+        private ObservableCollection<FacebookUser> _members;
 
         public MainViewModel()
         {
@@ -25,6 +34,7 @@ namespace FacebookApp.ViewModels
             FBPage = new FacebookPage();
             FBPost = new FacebookPost();
             FBUser = new FacebookUser();
+            FBGroup = new FacebookGroup();
             FBComment = new FacebookComment();
             FBAuth = new FacebookAuthenticator
             {
@@ -35,51 +45,87 @@ namespace FacebookApp.ViewModels
                 AppAccessToken = "191439638113408|Zg-Ci3Qt-HGaPmrdse9yZTfT_VE"
             };
             UserID = PostID = CommentID = PageID = "";
+            GroupID = "test string";
         }
 
         public void ExportToCSV()
         {
+            // Mock up some dummy data to fill .csv file
+            FacebookPage testPage = JsonConvert.DeserializeObject<FacebookPage>(FBPlugin.GetPageData("CityOfKingston", FBAuth.UserAccessToken));
+            testPage.Posts = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetPageFeed("CityOfKingston", FBAuth.PageAccessToken));
+            ObservableCollection<FacebookPost> testPagePosts = testPage.Posts.Data;
+            FacebookPost testPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData("144064188977112_1813323618717819", FBAuth.PageAccessToken));
+            testPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments("144064188977112_1813323618717819", FBAuth.PageAccessToken));
+            ObservableCollection<FacebookComment> testComments = testPost.Comments.Data;
+            
+
+            // Question: Post, Responses: Comments
             var export = new CsvExport();
-            // need logic here
+            foreach (FacebookComment comment in testComments)
+            {
+                export.AddRow();
+                export[testPost.Message] = comment.Message;
+            }
+
+            File.WriteAllBytes(@"C:\Users\acheevers\Documents\survey1.csv", export.ExportToBytes());
+
+            // Question: Post, Response: Reactions
+            testPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData("226889444550986_226890444550886", FBAuth.PageAccessToken));
+            testPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions("226889444550986_226890444550886", FBAuth.PageAccessToken));
+            ObservableCollection<Reaction> testReactions = testPost.Reactions.Data;
+            export = new CsvExport();
+            foreach (Reaction reaction in testReactions)
+            {
+                export.AddRow();
+                export[testPost.Message] = reaction.Type;
+            }
+
+            File.WriteAllBytes(@"C:\Users\acheevers\Documents\survey2.csv", export.ExportToBytes());
         }
 
         public void SetUser()
         {
             FBUser = JsonConvert.DeserializeObject<FacebookUser>(FBPlugin.GetUserData(UserID, FBAuth.UserAccessToken));
-        }
-
-        public void SetUserPages()
-        {
             FBUser.Accounts = JsonConvert.DeserializeObject<FacebookAccounts>(FBPlugin.GetPages(UserID, FBAuth.UserAccessToken));
             Pages = FBUser.Accounts.Data;
+            FBUser.Groups = JsonConvert.DeserializeObject<FacebookGroups>(FBPlugin.GetGroups(UserID, FBAuth.UserAccessToken));
+            Groups = FBUser.Groups.Data;
         }
 
         public void SetUserPage()
         {
             FBPage = JsonConvert.DeserializeObject<FacebookPage>(FBPlugin.GetPageData(PageID, FBAuth.PageAccessToken));
-            FBPage.Posts = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetPageFeed(FBPage.ID, FBAuth.PageAccessToken));
-            Posts = FBPage.Posts.Data;
+            FBPage.Posts = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetPageFeed(PageID, FBAuth.PageAccessToken));
+            PagePosts = FBPage.Posts.Data;
+        }
+
+        public void SetUserGroup()
+        {
+            FBGroup = JsonConvert.DeserializeObject<FacebookGroup>(FBPlugin.GetGroupData(GroupID, FBAuth.UserAccessToken));
+            FBGroup.Members = JsonConvert.DeserializeObject<FacebookMembers>(FBPlugin.GetGroupMembers(GroupID, FBAuth.UserAccessToken));
+            Members = FBGroup.Members.Data;
+            FBGroup.Posts = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetGroupFeed(GroupID, FBAuth.UserAccessToken));
+            GroupPosts = FBGroup.Posts.Data;
         }
 
         public void SetPublicPage()
         {
-            FBPage = JsonConvert.DeserializeObject<FacebookPage>(FBPlugin.GetPageData(PageID, FBAuth.UserAccessToken));
-        }
-
-        public void SetFeed()
-        {
-            FacebookFeed feedResponse = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetPageFeed(PageID, FBAuth.UserAccessToken));
-            Posts = feedResponse.Data;
+            FBPage = JsonConvert.DeserializeObject<FacebookPage>(FBPlugin.GetPublicPageData(PageID, FBAuth.UserAccessToken));
         }
 
         public void SetPost()
         {
-            FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.UserAccessToken));
+            FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.PageAccessToken));
+            FBPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments(PostID, FBAuth.PageAccessToken));
+            Comments = FBPost.Comments.Data;
+            FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.PageAccessToken));
+            FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.PageAccessToken));
+            Reactions = FBPost.Reactions.Data;
         }
 
         public void SetComment()
         {
-            FBComment = JsonConvert.DeserializeObject<FacebookComment>(FBPlugin.GetComment(CommentID, FBAuth.UserAccessToken));
+            FBComment = JsonConvert.DeserializeObject<FacebookComment>(FBPlugin.GetComment(CommentID, FBAuth.PageAccessToken));
         }
 
         #region Members
@@ -148,6 +194,19 @@ namespace FacebookApp.ViewModels
             }
         }
 
+        public FacebookGroup FBGroup
+        {
+            get { return _fbGroup; }
+            set
+            {
+                if (_fbGroup != value)
+                {
+                    _fbGroup = value;
+                    RaisePropertyChanged("FBGroup");
+                }
+            }
+        }
+
         public string CommentID
         {
             get { return FBComment.ID; }
@@ -200,15 +259,41 @@ namespace FacebookApp.ViewModels
             }
         }
 
-        public ObservableCollection<FacebookPost> Posts
+        public string GroupID
         {
-            get { return _posts; }
+            get { return FBGroup.ID; }
             set
             {
-                if (_posts != value)
+                if (FBGroup.ID != value)
                 {
-                    _posts = value;
-                    RaisePropertyChanged("Posts");
+                    FBGroup.ID = value;
+                    RaisePropertyChanged("GroupID");
+                }
+            }
+        }
+
+        public ObservableCollection<FacebookPost> PagePosts
+        {
+            get { return _pagePosts; }
+            set
+            {
+                if (_pagePosts != value)
+                {
+                    _pagePosts = value;
+                    RaisePropertyChanged("PagePosts");
+                }
+            }
+        }
+
+        public ObservableCollection<FacebookPost> GroupPosts
+        {
+            get { return _groupPosts; }
+            set
+            {
+                if (_groupPosts != value)
+                {
+                    _groupPosts = value;
+                    RaisePropertyChanged("GroupPosts");
                 }
             }
         }
@@ -226,15 +311,15 @@ namespace FacebookApp.ViewModels
             }
         }
 
-        public FacebookPlugin FBPlugin
+        public ObservableCollection<Reaction> Reactions
         {
-            get { return _fbPlugin; }
+            get { return _reactions; }
             set
             {
-                if (_fbPlugin != value)
+                if (_reactions != value)
                 {
-                    _fbPlugin = value;
-                    RaisePropertyChanged("FBPlugin");
+                    _reactions = value;
+                    RaisePropertyChanged("Reactions");
                 }
             }
         }
@@ -248,6 +333,45 @@ namespace FacebookApp.ViewModels
                 {
                     _pages = value;
                     RaisePropertyChanged("Pages");
+                }
+            }
+        }
+
+        public ObservableCollection<FacebookGroup> Groups
+        {
+            get { return _groups; }
+            set
+            {
+                if (_groups != value)
+                {
+                    _groups = value;
+                    RaisePropertyChanged("Groups");
+                }
+            }
+        }
+
+        public ObservableCollection<FacebookUser> Members
+        {
+            get { return _members; }
+            set
+            {
+                if (_members != value)
+                {
+                    _members = value;
+                    RaisePropertyChanged("Members");
+                }
+            }
+        }
+
+        public FacebookPlugin FBPlugin
+        {
+            get { return _fbPlugin; }
+            set
+            {
+                if (_fbPlugin != value)
+                {
+                    _fbPlugin = value;
+                    RaisePropertyChanged("FBPlugin");
                 }
             }
         }

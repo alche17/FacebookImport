@@ -64,23 +64,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="FacebookPlugin.cs" />
-    <Compile Include="Models\FacebookProfiles.cs" />
+    <Compile Include="Models\Collections\FacebookGroups.cs" />
+    <Compile Include="Models\Collections\FacebookMembers.cs" />
+    <Compile Include="Models\Collections\FacebookProfiles.cs" />
     <Compile Include="Models\FacebookComments.cs" />
-    <Compile Include="Models\FacebookFeed.cs" />
-    <Compile Include="Models\FacebookComment.cs" />
+    <Compile Include="Models\Collections\FacebookFeed.cs" />
+    <Compile Include="Models\Objects\FacebookComment.cs" />
+    <Compile Include="Models\Collections\FacebookReactions.cs" />
     <Compile Include="Models\Metadata\AgeRange.cs" />
-    <Compile Include="Models\FacebookAccounts.cs" />
+    <Compile Include="Models\Collections\FacebookAccounts.cs" />
     <Compile Include="Models\FacebookAuthenticator.cs" />
     <Compile Include="Models\Metadata\Reaction.cs" />
-    <Compile Include="Models\Profiles\FacebookPage.cs" />
-    <Compile Include="Models\FacebookPost.cs" />
-    <Compile Include="Models\Profiles\FacebookProfile.cs" />
-    <Compile Include="Models\Profiles\FacebookUser.cs" />
+    <Compile Include="Models\Objects\FacebookPage.cs" />
+    <Compile Include="Models\Objects\FacebookPost.cs" />
+    <Compile Include="Models\Objects\FacebookProfile.cs" />
+    <Compile Include="Models\Objects\FacebookUser.cs" />
     <Compile Include="Models\Metadata\Location.cs" />
     <Compile Include="Models\Metadata\Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\FacebookAuthenticationViewModel.cs" />
-    <Compile Include="Models\Profiles\FacebookGroup.cs" />
+    <Compile Include="Models\Objects\FacebookGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -10,13 +10,13 @@ namespace FacebookClassLibrary.Models
     public class FacebookGroup : FacebookProfile
     {
         #region fields
-        public string Access_Token { get; set; }
+        public string Privacy { get; set; }
         #endregion
 
         #region edges
-        public ObservableCollection<FacebookPost> Feed { get; set; }
+        public FacebookFeed Posts { get; set; }
 
-        public ObservableCollection<FacebookUser> Members { get; set; }
+        public FacebookMembers Members { get; set; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;

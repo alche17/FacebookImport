@@ -27,31 +27,58 @@ namespace FacebookClassLibrary
             return response.Content;
         }
 
+        #region Users
         public string GetUserData(string user_id, string access_token)
         {
             return FacebookAPICall(user_id, access_token, "id,name,address,age_range,gender,locale,location");
         }
+        #endregion
 
+        #region Pages
         public string GetPageFeed(string page_id, string access_token)
         {
-            return FacebookAPICall(page_id + "/feed", access_token, "id,message,from,likes,comments,place");
-        }
-
-        public string GetPages(string user_id, string access_token)
-        {
-            return FacebookAPICall(user_id + "/accounts", access_token);
+            return FacebookAPICall(page_id + "/feed", access_token, "id,message,from,place");
         }
 
         public string GetPageData(string page_id, string access_token)
         {
-            return FacebookAPICall(page_id, access_token, "id,name,category,fan_count");
+            return FacebookAPICall(page_id, access_token, "access_token,category,name,id,fan_count");
         }
 
-        public string GetPermissions(string user_id, string access_token)
+        public string GetPublicPageData(string page_id, string access_token)
         {
-            return FacebookAPICall(user_id + "permissions", access_token);
+            return FacebookAPICall(page_id, access_token, "access_token,category,name,id,fan_count");
         }
 
+        public string GetPages(string user_id, string access_token)
+        {
+            return FacebookAPICall(user_id + "/accounts", access_token, "access_token,category,name,id,perms,fan_count");
+        }
+        #endregion
+
+        #region Groups
+        public string GetGroups(string user_id, string access_token)
+        {
+            return FacebookAPICall(user_id + "/groups", access_token);
+        }
+
+        public string GetGroupFeed(string group_id, string access_token)
+        {
+            return FacebookAPICall(group_id + "/feed", access_token, "id,message,from,place");
+        }
+
+        public string GetGroupData(string group_id, string access_token)
+        {
+            return FacebookAPICall(group_id, access_token);
+        }
+
+        public string GetGroupMembers(string group_id, string access_token)
+        {
+            return FacebookAPICall(group_id + "/members", access_token);
+        }
+        #endregion
+
+        #region Posts
         public string GetPostData(string post_id, string access_token)
         {
             return FacebookAPICall(post_id, access_token, "message,id,from,place,likes,comments");
@@ -62,9 +89,22 @@ namespace FacebookClassLibrary
             return FacebookAPICall(post_id + "/comments", access_token);
         }
 
+        public string GetPostLikes(string post_id, string access_token)
+        {
+            return FacebookAPICall(post_id + "/likes", access_token);
+        }
+
+        public string GetPostReactions(string post_id, string access_token)
+        {
+            return FacebookAPICall(post_id + "/reactions", access_token);
+        }
+        #endregion
+
+        #region Comments
         public string GetComment(string comment_id, string access_token)
         {
-            return FacebookAPICall(comment_id, access_token);
+            return FacebookAPICall(comment_id, access_token, "id,from,message,like_count");
         }
+        #endregion
     }
 }

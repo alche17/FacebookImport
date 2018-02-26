@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525"
+        Title="MainWindow" Height="800" Width="600"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -13,57 +13,60 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
-    <ScrollViewer>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-            <materialDesign:ColorZone Grid.ColumnSpan="2" Mode="PrimaryMid" Padding="10">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" Text="Facebook Import">
-                    </TextBlock>
-                </StackPanel>
-            </materialDesign:ColorZone>
-            <!-- Side bar menu -->
-            <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
-                <Button HorizontalContentAlignment="Left" Content="LOGIN" Margin="0 20 0 0" Click="LoginClick" 
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Separator Style="{StaticResource MaterialDesignSeparator}" />
-                <Label Content="User Account" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
-                <Button HorizontalContentAlignment="Left" Click="GetUserInfoClick" Content="GET USER INFO"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetUserPagesClick" Content="GET USER PAGES"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetPageClick" Content="GET PAGE"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetPostClick" Content="GET POST"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetCommentClick" Content="GET COMMENT"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Separator Style="{StaticResource MaterialDesignSeparator}" />
-                <Label Content="Public" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
-                <Button HorizontalContentAlignment="Left" Click="GetPublicPageClick" Content="GET PAGE"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetKCCPageClick" Content="GET KCC PAGE"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetKCCFeedClick" Content="GET KCC FEED"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Button HorizontalContentAlignment="Left" Click="GetKCCSamplePostClick" Content="GET KCC SAMPLE POST"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-                <Separator Style="{StaticResource MaterialDesignSeparator}" />
-                <Label Content="Filter" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
-                <TextBox Margin="15 5" Foreground="White" Text="{Binding UserID, Mode=TwoWay}" materialDesign:HintAssist.Hint="User ID" />
-                <TextBox Margin="15 5" Foreground="White" Text="{Binding PageID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Page ID" />
-                <TextBox Margin="15 5" Foreground="White" Text="{Binding PostID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Post ID" />
-                <TextBox Margin="15 5" Foreground="White" Text="{Binding CommentID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Comment ID" />
+        <materialDesign:ColorZone Grid.ColumnSpan="2" Mode="PrimaryMid" Padding="10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" Text="Facebook Import">
+                </TextBlock>
             </StackPanel>
+        </materialDesign:ColorZone>
+        <!-- Side bar menu -->
+        <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
+            <Button HorizontalContentAlignment="Left" Content="LOGIN" Margin="0 20 0 0" Click="LoginClick" 
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Label Content="User Account" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+            <Button HorizontalContentAlignment="Left" Click="GetUserInfoClick" Content="GET USER INFO"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPageClick" Content="GET PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetGroupClick" Content="GET GROUP"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPostClick" Content="GET POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetCommentClick" Content="GET COMMENT"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Label Content="Public" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+            <Button HorizontalContentAlignment="Left" Click="GetPublicPageClick" Content="GET PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetKCCPageClick" Content="GET KCC PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetKCCSamplePostClick" Content="GET KCC SAMPLE POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Label Content="Filter" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+            <TextBox Margin="15 5" Foreground="White" Text="{Binding UserID, Mode=TwoWay}" materialDesign:HintAssist.Hint="User ID" />
+            <TextBox Margin="15 5" Foreground="White" Text="{Binding PageID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Page ID" />
+            <TextBox Margin="15 5" Foreground="White" Text="{Binding GroupID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Group ID" />
+            <TextBox Margin="15 5" Foreground="White" Text="{Binding PostID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Post ID" />
+            <TextBox Margin="15 5" Foreground="White" Text="{Binding CommentID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Comment ID" />
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Label Content="Exporting" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+            <Button HorizontalContentAlignment="Left" Click="ExportToCSVClick" Content="EXPORT TO .CSV"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+        </StackPanel>
 
+        <ScrollViewer Grid.Row="1" Grid.Column="1">
             <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="1" Margin="5">
                 <!-- User Information Card -->
                 <materialDesign:Card Padding="8" Margin="10 5 10 10">
@@ -74,7 +77,7 @@
                         <TextBlock Text="Basic" FontSize="16" Padding="5" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="ID" Width="80" />
-                            <Label Content="{Binding FBUser.ID}" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBUser.ID}" ></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Name" Width="80" />
@@ -104,34 +107,47 @@
                                 <Label Content="{Binding FBUser.Location.Country}" />
                             </StackPanel>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Pages" Width="80" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000" Grid.Row="2" ItemsSource="{Binding Pages}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Fan_Count}" Header="Fan Count" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Access_Token}" Header="Access Token" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Groups" Width="80" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000" Grid.Row="2" ItemsSource="{Binding Groups}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Privacy}" Header="Privacy" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
                     </StackPanel>
                 </materialDesign:Card>
-                
-                <!-- User Pages Card -->
-                <materialDesign:Card Padding="8" Margin="10 5 10 10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="User's Pages">
-                        </TextBlock>
-                        <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
-                        <ListView VerticalAlignment="Top" MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Pages}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Category}" Header="Category" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Fan_Count}" Header="Fan Count" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Access_Token}" Header="Access Token" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                </materialDesign:Card>
-                
+
                 <!-- Page Info Card -->
                 <materialDesign:Card Padding="8" Margin="10 5 10 10">
                     <StackPanel>
@@ -141,7 +157,7 @@
                         <TextBlock Text="Basic" FontSize="16" Padding="5" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="ID" Width="100" />
-                            <Label Content="{Binding FBPage.ID}" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBPage.ID}" ></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Name" Width="100" />
@@ -161,40 +177,84 @@
                             <Label Content="{Binding FBPage.Fan_Count}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="Perms" Width="100" />
-                            <Label Content="{Binding FBPage.Perms}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
                             <Label Content="Posts" Width="100" />
-                            <Label Content="{Binding FBPage.Posts}" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding PagePosts}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Place.Name}" Header="Place" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:Card>
 
-                <!-- Page Posts -->
+                <!-- Group Info Card -->
                 <materialDesign:Card Padding="8" Margin="10 5 10 10">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Page's Posts">
-                        </TextBlock>
-                        <Separator Grid.Row="1"  Style="{StaticResource MaterialDesignDarkSeparator}" />
-                        <ListView VerticalAlignment="Top" MaxHeight="300" Grid.Row="2" ItemsSource="{Binding Posts}">
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn DisplayMemberBinding="{Binding ID}" Header="ID" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Place.Name}" Header="Place" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Likes}" Header="Likes" />
-                                    <GridViewColumn DisplayMemberBinding="{Binding Comments}" Header="Comments" />
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" 
+                                   Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Group" />
+                        <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <TextBlock Text="Basic" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID" Width="100" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBGroup.ID}" ></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Name" Width="100" />
+                            <Label Content="{Binding FBGroup.Name}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Privacy" Width="100" />
+                            <Label Content="{Binding FBGroup.Privacy}" />
+                        </StackPanel>
+                        <TextBlock Text="Advanced" FontSize="16" Padding="5" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Members" Width="100" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000" Grid.Row="2" ItemsSource="{Binding Members}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Posts" Width="100" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding GroupPosts}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Place.Name}" Header="Place" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
                 </materialDesign:Card>
 
                 <!-- Post Info Card -->
@@ -205,7 +265,7 @@
                         <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
                         <StackPanel Orientation="Horizontal">
                             <Label Content="ID" Width="100" />
-                            <Label Content="{Binding FBPost.ID}" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBPost.ID}" ></TextBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="From" Width="100" />
@@ -217,19 +277,77 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Place" Width="100" />
-                            <Label Content="{Binding FBPost.Place}" />
+                            <Label Content="{Binding FBPost.Place.Name}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Likes" Width="100" />
-                            <Label Content="{Binding FBPost.Likes}" />
+                            <Label Content="{Binding FBPost.Likes.Data.Count}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Comments" Width="100" />
-                            <Label Content="{Binding FBPost.Comments}" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Comments}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Reactions" Width="100" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Reactions}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="From" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Type}" Header="Message" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+                
+                <!-- Comment Info Card -->
+                <materialDesign:Card Padding="8" Margin="10 5 10 10">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="5 10 0 0" 
+                                   Style="{StaticResource MaterialDesignTitleTextBlock}" Text="Comment" />
+                        <Separator Style="{StaticResource MaterialDesignDarkSeparator}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ID" Width="100" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBComment.ID}" ></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="From" Width="100" />
+                            <Label Content="{Binding FBComment.From.Name}" />
+                            <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding FBComment.From.ID}" ></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Like Count" Width="100" />
+                            <Label Content="{Binding FBComment.Like_Count}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Message" Width="100" />
+                            <Label Content="{Binding FBComment.Message}" />
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:Card>
             </StackPanel>
-        </Grid>
-    </ScrollViewer>
+        </ScrollViewer>
+    </Grid>
 </Window>

@@ -19,6 +19,8 @@ namespace FacebookClassLibrary.Models
         #endregion
 
         #region Edges
+        public FacebookGroups Groups { get; set; }
+
         public FacebookAccounts Accounts { get; set; }
         #endregion
     }

@@ -19,6 +19,8 @@ namespace FacebookClassLibrary.Models
         #region edges
         public FacebookProfiles Likes { get; set; }
 
+        public FacebookReactions Reactions { get; set; }
+
         public FacebookComments Comments { get; set; }
         #endregion
     }
