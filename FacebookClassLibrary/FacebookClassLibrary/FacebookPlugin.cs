@@ -122,6 +122,21 @@ namespace FacebookClassLibrary
         {
             return FacebookAPICall(comment_id, access_token, "id,from,message,like_count");
         }
+
+        public string GetCommentComments(string comment_id, string access_token)
+        {
+            return FacebookAPICall(comment_id + "/comments", access_token);
+        }
+
+        public string GetCommentLikes(string comment_id, string access_token)
+        {
+            return FacebookAPICall(comment_id + "/likes", access_token);
+        }
+
+        public string GetCommentReactions(string comment_id, string access_token)
+        {
+            return FacebookAPICall(comment_id + "/reactions", access_token);
+        }
         #endregion
     }
 }

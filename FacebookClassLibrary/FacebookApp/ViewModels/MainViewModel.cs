@@ -21,7 +21,8 @@ namespace FacebookApp.ViewModels
         private FacebookAuthenticator _fbAuth;
         private ObservableCollection<FacebookPage> _pages;
         private ObservableCollection<FacebookPost> _pagePosts;
-        private ObservableCollection<FacebookComment> _comments;
+        private ObservableCollection<FacebookComment> _postComments;
+        private ObservableCollection<FacebookComment> _commentComments;
         private ObservableCollection<Reaction> _reactions;
         private ObservableCollection<FacebookGroup> _groups;
         private ObservableCollection<FacebookPost> _groupPosts;
@@ -141,7 +142,7 @@ namespace FacebookApp.ViewModels
         {
             FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.UserAccessToken));
             FBPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments(PostID, FBAuth.UserAccessToken));
-            Comments = FBPost.Comments.Data;
+            PostComments = FBPost.Comments.Data;
             FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.UserAccessToken));
             FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.UserAccessToken));
             Reactions = FBPost.Reactions.Data;
@@ -151,7 +152,7 @@ namespace FacebookApp.ViewModels
         {
             FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.PageAccessToken));
             FBPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments(PostID, FBAuth.PageAccessToken));
-            Comments = FBPost.Comments.Data;
+            PostComments = FBPost.Comments.Data;
             FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.PageAccessToken));
             FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.PageAccessToken));
             Reactions = FBPost.Reactions.Data;
@@ -160,6 +161,11 @@ namespace FacebookApp.ViewModels
         public void SetComment()
         {
             FBComment = JsonConvert.DeserializeObject<FacebookComment>(FBPlugin.GetComment(CommentID, FBAuth.PageAccessToken));
+            FBComment.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetCommentComments(CommentID, FBAuth.PageAccessToken));
+            CommentComments = FBComment.Comments.Data;
+            FBComment.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetCommentLikes(CommentID, FBAuth.PageAccessToken));
+            FBComment.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetCommentReactions(CommentID, FBAuth.PageAccessToken));
+            Reactions = FBComment.Reactions.Data;
         }
 
         #region Members
@@ -345,15 +351,28 @@ namespace FacebookApp.ViewModels
             }
         }
 
-        public ObservableCollection<FacebookComment> Comments
+        public ObservableCollection<FacebookComment> PostComments
         {
-            get { return _comments; }
+            get { return _postComments; }
             set
             {
-                if (_comments != value)
+                if (_postComments != value)
                 {
-                    _comments = value;
-                    RaisePropertyChanged("Comments");
+                    _postComments = value;
+                    RaisePropertyChanged("PostComments");
+                }
+            }
+        }
+
+        public ObservableCollection<FacebookComment> CommentComments
+        {
+            get { return _commentComments; }
+            set
+            {
+                if (_commentComments != value)
+                {
+                    _commentComments = value;
+                    RaisePropertyChanged("CommentComments");
                 }
             }
         }

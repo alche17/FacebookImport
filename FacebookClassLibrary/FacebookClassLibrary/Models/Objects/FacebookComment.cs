@@ -15,5 +15,11 @@ namespace FacebookClassLibrary.Models
         public int Like_Count { get; set; }
 
         public string Message { get; set; }
+
+        public FacebookComments Comments { get; set; }
+
+        public FacebookReactions Reactions { get; set; }
+
+        public FacebookProfiles Likes { get; set; }
     }
 }

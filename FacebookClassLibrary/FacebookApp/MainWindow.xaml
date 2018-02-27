@@ -297,7 +297,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Comments" Width="100" />
-                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Comments}">
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding PostComments}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="ID">
@@ -356,6 +356,42 @@
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Message" Width="100" />
                             <Label Content="{Binding FBComment.Message}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Comments" Width="100" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding CommentComments}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Message}" Header="Message" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding From.Name}" Header="From" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Reactions" Width="100" />
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Reactions}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="ID">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBox IsReadOnly="True" BorderBrush="{x:Null}" Background="{x:Null}" Text="{Binding ID}" ></TextBox>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="From" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Type}" Header="Message" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
                         </StackPanel>
                     </StackPanel>
                 </materialDesign:Card>
