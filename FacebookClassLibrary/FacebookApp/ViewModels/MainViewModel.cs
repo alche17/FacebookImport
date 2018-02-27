@@ -23,7 +23,8 @@ namespace FacebookApp.ViewModels
         private ObservableCollection<FacebookPost> _pagePosts;
         private ObservableCollection<FacebookComment> _postComments;
         private ObservableCollection<FacebookComment> _commentComments;
-        private ObservableCollection<Reaction> _reactions;
+        private ObservableCollection<Reaction> _postReactions;
+        private ObservableCollection<Reaction> _commentReactions;
         private ObservableCollection<FacebookGroup> _groups;
         private ObservableCollection<FacebookPost> _groupPosts;
         private ObservableCollection<FacebookUser> _members;
@@ -145,7 +146,7 @@ namespace FacebookApp.ViewModels
             PostComments = FBPost.Comments.Data;
             FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.UserAccessToken));
             FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.UserAccessToken));
-            Reactions = FBPost.Reactions.Data;
+            PostReactions = FBPost.Reactions.Data;
         }
 
         public void SetPagePost()
@@ -155,17 +156,27 @@ namespace FacebookApp.ViewModels
             PostComments = FBPost.Comments.Data;
             FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.PageAccessToken));
             FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.PageAccessToken));
-            Reactions = FBPost.Reactions.Data;
+            PostReactions = FBPost.Reactions.Data;
         }
 
-        public void SetComment()
+        public void SetPageComment()
         {
             FBComment = JsonConvert.DeserializeObject<FacebookComment>(FBPlugin.GetComment(CommentID, FBAuth.PageAccessToken));
             FBComment.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetCommentComments(CommentID, FBAuth.PageAccessToken));
             CommentComments = FBComment.Comments.Data;
             FBComment.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetCommentLikes(CommentID, FBAuth.PageAccessToken));
             FBComment.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetCommentReactions(CommentID, FBAuth.PageAccessToken));
-            Reactions = FBComment.Reactions.Data;
+            CommentReactions = FBComment.Reactions.Data;
+        }
+
+        public void SetComment()
+        {
+            FBComment = JsonConvert.DeserializeObject<FacebookComment>(FBPlugin.GetComment(CommentID, FBAuth.UserAccessToken));
+            FBComment.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetCommentComments(CommentID, FBAuth.UserAccessToken));
+            CommentComments = FBComment.Comments.Data;
+            FBComment.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetCommentLikes(CommentID, FBAuth.UserAccessToken));
+            FBComment.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetCommentReactions(CommentID, FBAuth.UserAccessToken));
+            CommentReactions = FBComment.Reactions.Data;
         }
 
         #region Members
@@ -377,15 +388,28 @@ namespace FacebookApp.ViewModels
             }
         }
 
-        public ObservableCollection<Reaction> Reactions
+        public ObservableCollection<Reaction> PostReactions
         {
-            get { return _reactions; }
+            get { return _postReactions; }
             set
             {
-                if (_reactions != value)
+                if (_postReactions != value)
                 {
-                    _reactions = value;
-                    RaisePropertyChanged("Reactions");
+                    _postReactions = value;
+                    RaisePropertyChanged("PostReactions");
+                }
+            }
+        }
+
+        public ObservableCollection<Reaction> CommentReactions
+        {
+            get { return _commentReactions; }
+            set
+            {
+                if (_commentReactions != value)
+                {
+                    _commentReactions = value;
+                    RaisePropertyChanged("CommentReactions");
                 }
             }
         }

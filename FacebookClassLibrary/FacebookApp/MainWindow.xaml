@@ -35,31 +35,39 @@
                 <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Margin="10 20 0 10" />
                 <Label Content="{Binding LoggedIn}" Margin="0 15 0 0" Foreground="White"></Label>
             </StackPanel>
+            <!-- Login/logout -->
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Button HorizontalContentAlignment="Left" Content="LOGIN" Click="LoginClick" 
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Content="LOGOUT" Click="LogoutClick" 
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <!-- User Account access -->
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="User Account" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
             <Button HorizontalContentAlignment="Left" Click="GetUserInfoClick" Content="GET USER INFO"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-            <Button HorizontalContentAlignment="Left" Click="GetPageClick" Content="GET PAGE"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetGroupClick" Content="GET GROUP"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
-            <Button HorizontalContentAlignment="Left" Click="GetPagePostClick" Content="GET PAGE POST"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetPostClick" Content="GET POST"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetCommentClick" Content="GET COMMENT"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <!-- Specifically for Pages (needs PAC) -->
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPageClick" Content="GET PAGE"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPagePostClick" Content="GET PAGE POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPageCommentClick" Content="GET PAGE COMMENT"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <!-- Kingston City Council Samples -->
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="Public" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
             <Button HorizontalContentAlignment="Left" Click="GetKCCPageClick" Content="GET KCC PAGE"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetKCCSamplePostClick" Content="GET KCC SAMPLE POST"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <!-- Filter by ID section -->
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="Filter" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
             <Label Content="User ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
@@ -315,7 +323,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Reactions" Width="100" />
-                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Reactions}">
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding PostReactions}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="ID">
@@ -377,7 +385,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
                             <Label Content="Reactions" Width="100" />
-                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding Reactions}">
+                            <ListView VerticalAlignment="Top" MaxHeight="300" MaxWidth="1000"  Grid.Row="2" ItemsSource="{Binding CommentReactions}">
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="ID">

@@ -71,6 +71,11 @@ namespace FacebookApp
             _mvm.SetComment();
         }
 
+        private void GetPageCommentClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetPageComment();
+        }
+
         private void GetKCCPageClick(object sender, RoutedEventArgs e)
         {
             _mvm.PageID = "CityOfKingston";
