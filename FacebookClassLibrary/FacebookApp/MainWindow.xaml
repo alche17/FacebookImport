@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="600"
+        Title="MainWindow" Height="700" Width="900"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -31,7 +31,14 @@
         </materialDesign:ColorZone>
         <!-- Side bar menu -->
         <StackPanel Orientation="Vertical" Grid.Row="1" Background="{DynamicResource MaterialDesignBodyLight}">
-            <Button HorizontalContentAlignment="Left" Content="LOGIN" Margin="0 20 0 0" Click="LoginClick" 
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Margin="10 20 0 10" />
+                <Label Content="{Binding LoggedIn}" Margin="0 15 0 0" Foreground="White"></Label>
+            </StackPanel>
+            <Separator Style="{StaticResource MaterialDesignSeparator}" />
+            <Button HorizontalContentAlignment="Left" Content="LOGIN" Click="LoginClick" 
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Content="LOGOUT" Click="LogoutClick" 
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="User Account" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
@@ -41,14 +48,14 @@
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetGroupClick" Content="GET GROUP"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
+            <Button HorizontalContentAlignment="Left" Click="GetPagePostClick" Content="GET PAGE POST"
+                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetPostClick" Content="GET POST"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetCommentClick" Content="GET COMMENT"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="Public" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
-            <Button HorizontalContentAlignment="Left" Click="GetPublicPageClick" Content="GET PAGE"
-                        Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetKCCPageClick" Content="GET KCC PAGE"
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Button HorizontalContentAlignment="Left" Click="GetKCCSamplePostClick" Content="GET KCC SAMPLE POST"

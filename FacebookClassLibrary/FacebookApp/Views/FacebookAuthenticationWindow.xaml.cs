@@ -4,6 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using FacebookClassLibrary.ViewModels;
 using FacebookClassLibrary;
+using FacebookApp.ViewModels;
 
 namespace FacebookApp
 {
@@ -12,14 +13,14 @@ namespace FacebookApp
     /// </summary>
     public partial class FacebookAuthenticationWindow : Window
     {
-        public FacebookAuthenticationViewModel Fbvm;
         public FacebookPlugin FbPlugin;
+        public ViewModels.MainViewModel Fbvm;
 
-        public FacebookAuthenticationWindow()
+        public FacebookAuthenticationWindow(ViewModels.MainViewModel viewModel)
         {
             InitializeComponent();
 
-            Fbvm = new FacebookAuthenticationViewModel();
+            Fbvm = viewModel;
             FbPlugin = new FacebookPlugin();
             DataContext = Fbvm;
 
@@ -51,8 +52,11 @@ namespace FacebookApp
                 url = (new Regex("#")).Replace(url, "?", 1);
                 Dictionary<string, string> urlParams = GetParams(url);
 
-                // NEED TO FIND OUT HOW TO DO THIS OUTSIDE DEVELOPMENT
-                //FbPlugin.SetUserAccessToken(urlParams["access_token"]);
+                Properties.Settings.Default.UserAccessToken = urlParams["access_token"];
+                Properties.Settings.Default.Save();
+                Fbvm.FBAuth.UserAccessToken = Properties.Settings.Default.UserAccessToken;
+                Fbvm.IsLoggedIn();
+                Fbvm.SetUser();
                 DialogResult = true;
                 Close();
             }

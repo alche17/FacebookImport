@@ -1,8 +1,5 @@
 ﻿using System.Windows;
 using FacebookApp.ViewModels;
-using System.Windows.Controls;
-using System.Windows.Input;
-using System.Text;
 
 namespace FacebookApp
 {
@@ -23,10 +20,15 @@ namespace FacebookApp
 
         private void LoginClick(object sender, RoutedEventArgs e)
         {
-            FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow();
+            FacebookAuthenticationWindow dialog = new FacebookAuthenticationWindow(_mvm);
             if (dialog.ShowDialog() == true)
             {
             }
+        }
+
+        private void LogoutClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.DeleteUserLogin();
         }
 
         private void ExportToCSVClick(object sender, RoutedEventArgs e)
@@ -57,6 +59,11 @@ namespace FacebookApp
         private void GetPostClick(object sender, RoutedEventArgs e)
         {
             _mvm.SetPost();
+        }
+
+        private void GetPagePostClick(object sender, RoutedEventArgs e)
+        {
+            _mvm.SetPagePost();
         }
 
         private void GetCommentClick(object sender, RoutedEventArgs e)

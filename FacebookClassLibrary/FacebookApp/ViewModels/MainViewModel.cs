@@ -2,17 +2,16 @@
 using FacebookClassLibrary;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using Jitbit.Utils;
 using FacebookClassLibrary.Models.Metadata;
-using System;
 using System.IO;
-using System.Collections.Generic;
+using FacebookClassLibrary.ViewModels;
 
 namespace FacebookApp.ViewModels
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public partial class MainViewModel : BindableBase
     {
+        private string _loggedIn;
         private FacebookUser _fbUser;
         private FacebookPage _fbPage;
         private FacebookPost _fbPost;
@@ -38,14 +37,24 @@ namespace FacebookApp.ViewModels
             FBComment = new FacebookComment();
             FBAuth = new FacebookAuthenticator
             {
-                UserAccessToken = "EAACuHQOgLIABAGyLF625fLgkB2NFCUjF71zXDcHduaeAuaQwX6bZBhYIi24Q9dzgZBj8gv6gcMNcgwXD2CXzp48D1XX5VtT69BCUWUgsyHYBW" +
-                "Bo788GKp4jwlYeyH3atpKUsUe85Que9xpU3gwwqUTVNnaKqk1IVoYUltLzQZDZD",
-                PageAccessToken = "EAACuHQOgLIABABZBnhGEZBushr4VWGWaZCeFh1PBTmMDEghZCKoqesNUfAtJ18R8VZCZANAwZA39NRcej0BjZBcyCHxOvnZAlVS7JSPuiAiRZ" +
-                "BQKcDzwPca4pnk9zY8Q8jVO8nQJYtAUKWnTOXsZAoORQP7ukyPHxY1klQmc81026lw1QZDZD",
+                UserAccessToken = Properties.Settings.Default.UserAccessToken,
                 AppAccessToken = "191439638113408|Zg-Ci3Qt-HGaPmrdse9yZTfT_VE"
             };
-            UserID = PostID = CommentID = PageID = "";
-            GroupID = "test string";
+            UserID = PostID = CommentID = PageID = GroupID;
+
+            IsLoggedIn();
+        }
+
+        public void IsLoggedIn()
+        {
+            if (FBAuth.UserAccessToken != "")
+            {
+                LoggedIn = "Logged in";
+            }
+            else
+            {
+                LoggedIn = "Logged Out";
+            }
         }
 
         public void ExportToCSV()
@@ -77,10 +86,19 @@ namespace FacebookApp.ViewModels
             foreach (Reaction reaction in testReactions)
             {
                 export.AddRow();
+                export["ID"] = reaction.ID;
+                export["Name"] = reaction.Name;
                 export[testPost.Message] = reaction.Type;
             }
 
             File.WriteAllBytes(@"C:\Users\acheevers\Documents\survey2.csv", export.ExportToBytes());
+        }
+
+        public void DeleteUserLogin()
+        {
+            FBPlugin.DeleteUserLogin(UserID, FBAuth.UserAccessToken);
+            FBAuth.UserAccessToken = "";
+            IsLoggedIn();
         }
 
         public void SetUser()
@@ -88,6 +106,7 @@ namespace FacebookApp.ViewModels
             FBUser = JsonConvert.DeserializeObject<FacebookUser>(FBPlugin.GetUserData(UserID, FBAuth.UserAccessToken));
             FBUser.Accounts = JsonConvert.DeserializeObject<FacebookAccounts>(FBPlugin.GetPages(UserID, FBAuth.UserAccessToken));
             Pages = FBUser.Accounts.Data;
+            FBAuth.PageAccessToken = Pages[0].Access_Token;
             FBUser.Groups = JsonConvert.DeserializeObject<FacebookGroups>(FBPlugin.GetGroups(UserID, FBAuth.UserAccessToken));
             Groups = FBUser.Groups.Data;
         }
@@ -111,9 +130,21 @@ namespace FacebookApp.ViewModels
         public void SetPublicPage()
         {
             FBPage = JsonConvert.DeserializeObject<FacebookPage>(FBPlugin.GetPublicPageData(PageID, FBAuth.UserAccessToken));
+            FBPage.Posts = JsonConvert.DeserializeObject<FacebookFeed>(FBPlugin.GetPageFeed(PageID, FBAuth.UserAccessToken));
+            PagePosts = FBPage.Posts.Data;
         }
 
         public void SetPost()
+        {
+            FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.UserAccessToken));
+            FBPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments(PostID, FBAuth.UserAccessToken));
+            Comments = FBPost.Comments.Data;
+            FBPost.Likes = JsonConvert.DeserializeObject<FacebookProfiles>(FBPlugin.GetPostLikes(PostID, FBAuth.UserAccessToken));
+            FBPost.Reactions = JsonConvert.DeserializeObject<FacebookReactions>(FBPlugin.GetPostReactions(PostID, FBAuth.UserAccessToken));
+            Reactions = FBPost.Reactions.Data;
+        }
+
+        public void SetPagePost()
         {
             FBPost = JsonConvert.DeserializeObject<FacebookPost>(FBPlugin.GetPostData(PostID, FBAuth.PageAccessToken));
             FBPost.Comments = JsonConvert.DeserializeObject<FacebookComments>(FBPlugin.GetPostComments(PostID, FBAuth.PageAccessToken));
@@ -272,6 +303,19 @@ namespace FacebookApp.ViewModels
             }
         }
 
+        public string LoggedIn
+        {
+            get { return _loggedIn; }
+            set
+            {
+                if (_loggedIn != value)
+                {
+                    _loggedIn = value;
+                    RaisePropertyChanged("LoggedIn");
+                }
+            }
+        }
+
         public ObservableCollection<FacebookPost> PagePosts
         {
             get { return _pagePosts; }
@@ -376,12 +420,5 @@ namespace FacebookApp.ViewModels
             }
         }
         #endregion
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void RaisePropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

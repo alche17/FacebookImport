@@ -27,6 +27,23 @@ namespace FacebookClassLibrary
             return response.Content;
         }
 
+        public string FacebookAPIDelete(string resource, string access_token)
+        {
+            var request = new RestRequest(Method.DELETE)
+            {
+                Resource = resource
+            };
+
+            request.AddParameter("access_token", access_token);
+            IRestResponse response = Client.Execute(request);
+            return response.Content;
+        }
+
+        public string DeleteUserLogin(string user_id, string access_token)
+        {
+            return FacebookAPIDelete(user_id + "/permissions", access_token);
+        }
+
         #region Users
         public string GetUserData(string user_id, string access_token)
         {

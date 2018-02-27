@@ -3,11 +3,11 @@ using FacebookClassLibrary.Models;
 
 namespace FacebookClassLibrary.ViewModels
 {
-    public class FacebookAuthenticationViewModel
+    public partial class MainViewModel
     {
         private FacebookAuthenticator _fba;
 
-        public FacebookAuthenticationViewModel()
+        public MainViewModel()
         {
             _fba = new FacebookAuthenticator();
         }
