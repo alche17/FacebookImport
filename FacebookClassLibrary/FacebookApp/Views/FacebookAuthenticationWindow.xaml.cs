@@ -56,7 +56,6 @@ namespace FacebookApp
                 Properties.Settings.Default.Save();
                 Fbvm.FBAuth.UserAccessToken = Properties.Settings.Default.UserAccessToken;
                 Fbvm.IsLoggedIn();
-                Fbvm.SetUser();
                 DialogResult = true;
                 Close();
             }

@@ -106,7 +106,10 @@ namespace FacebookApp.ViewModels
             FBUser = JsonConvert.DeserializeObject<FacebookUser>(FBPlugin.GetUserData(UserID, FBAuth.UserAccessToken));
             FBUser.Accounts = JsonConvert.DeserializeObject<FacebookAccounts>(FBPlugin.GetPages(UserID, FBAuth.UserAccessToken));
             Pages = FBUser.Accounts.Data;
-            FBAuth.PageAccessToken = Pages[0].Access_Token;
+            if (Pages != null)
+            {
+                FBAuth.PageAccessToken = Pages[0].Access_Token;
+            }
             FBUser.Groups = JsonConvert.DeserializeObject<FacebookGroups>(FBPlugin.GetGroups(UserID, FBAuth.UserAccessToken));
             Groups = FBUser.Groups.Data;
         }

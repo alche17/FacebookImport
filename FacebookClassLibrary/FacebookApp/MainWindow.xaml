@@ -62,10 +62,15 @@
                         Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidForegroundBrush}" />
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="Filter" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
+            <Label Content="User ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
             <TextBox Margin="15 5" Foreground="White" Text="{Binding UserID, Mode=TwoWay}" materialDesign:HintAssist.Hint="User ID" />
+            <Label Content="Page ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
             <TextBox Margin="15 5" Foreground="White" Text="{Binding PageID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Page ID" />
+            <Label Content="Group ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
             <TextBox Margin="15 5" Foreground="White" Text="{Binding GroupID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Group ID" />
+            <Label Content="Post ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
             <TextBox Margin="15 5" Foreground="White" Text="{Binding PostID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Post ID" />
+            <Label Content="Comment ID" FontSize="10" Foreground="GhostWhite" Margin="10 0" />
             <TextBox Margin="15 5" Foreground="White" Text="{Binding CommentID, Mode=TwoWay}" materialDesign:HintAssist.Hint="Comment ID" />
             <Separator Style="{StaticResource MaterialDesignSeparator}" />
             <Label Content="Exporting" FontSize="12" Foreground="GhostWhite" Margin="10 0" />
