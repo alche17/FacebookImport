@@ -31,7 +31,7 @@
         </materialDesign:ColorZone>
         <!-- Side bar menu -->
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-            <StackPanel Orientation="Vertical" Background="{DynamicResource MaterialDesignBodyLight}>
+            <StackPanel Orientation="Vertical" Background="{DynamicResource MaterialDesignBodyLight}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="AccountCircle" Foreground="White" Margin="10 20 0 10" />
                     <Label Content="{Binding LoggedIn}" Margin="0 15 0 0" Foreground="White"></Label>
